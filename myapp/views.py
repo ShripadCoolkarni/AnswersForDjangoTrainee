@@ -5,16 +5,15 @@ import threading
 import time
 
 def test_signal(request):
-    # Check if the signal is executed in the same thread
+   
     print(f"View thread: {threading.current_thread().name}")
     
     start_time = time.time()
     
     try:
-        # Simulate a database transaction with rollback
         with transaction.atomic():
             MyModel.objects.create(name="Test Object")
-            raise Exception("Simulating a transaction failure")  # This will rollback the transaction
+            raise Exception("Simulating a transaction failure")  
     except Exception as e:
         print(f"Transaction failed: {str(e)}")
 
